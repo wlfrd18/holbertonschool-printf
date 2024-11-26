@@ -4,13 +4,11 @@
 #include "main.h"
 
 /**
- * _printf - produce output according to a format.
- * @format: string to print.
- * @...: arguments.
- * Return: number of characters printed
- *	   excluding the null byte of the end.
+ * _printf - Produce output according to a format.
+ * @format: String to print.
+ * @...: Arguments.
+ * Return: Number of characters printed (excluding the null byte).
  */
-
 int _printf(const char *format, ...)
 {
 	va_list arguments;
@@ -21,48 +19,78 @@ int _printf(const char *format, ...)
 
 	while (*pointer != '\0')
 	{
-		if ( *pointer == '%')
-		{
-			pointer++;
-			if (*pointer == 'c')
-			{
-				char c = va_arg(arguments, int);
-				write(1, &c, 1);
-				count++;
-			}
-			else if (*pointer == 's')
-			{
-				char *string = va_arg(arguments, char *);
-				if (string == NULL)
-				{
-					string = NULL;
-				}
-				while (*string != 0)
-				{
-					write(1, string, 1);
-					string++;
-					count++;
-				}
-			}
-			else if (*pointer == '%')
-			{
-				write(1, "%", 1);
-				count++;
-			}
-			else
-			{
-				write(1, "%", 1);
-				write(1, pointer, 1);
-				count += 2;
-			}
-		}
-		else
-		{
-			write(1, pointer, 1);
-			count++;
-		}
+	if (*pointer == '%')
+	{
 		pointer++;
+		count += handle_specifiers(*pointer, arguments);
+	}
+	else
+	{
+		count += print_char(*pointer);
+	}
+	pointer++;
 	}
 	va_end(arguments);
 	return (count);
+}
+
+/**
+ * handle_specifiers - Handle the format specifiers.
+ * @specifier: The format specifier.
+ * @arguments: The arguments list.
+ * Return: The number of characters printed for the specifier.
+ */
+int handle_specifiers(char specifier, va_list arguments)
+{
+	int count = 0;
+
+	if (specifier == 'c')
+		count += print_char(va_arg(arguments, int));
+	else if (specifier == 's')
+		count += print_string(va_arg(arguments, char *));
+	else if (specifier == '%')
+		count += print_percent();
+	else
+	{
+	count += print_char('%');
+	count += print_char(specifier);
+	}
+
+	return (count);
+}
+
+/**
+ * print_char - Print a single character.
+ * @c: The character to print.
+ * Return: The number of characters printed (1).
+ */
+int print_char(char c)
+{
+	return (write(1, &c, 1));
+}
+
+/**
+ * print_string - Print a string.
+ * @s: The string to print.
+ * Return: The number of characters printed.
+ */
+int print_string(char *s)
+{
+	int len = 0;
+
+	if (s == NULL)
+		s = NULL;
+
+	while (s[len] != '\0')
+		len++;
+	return (write(1, s, len));
+}
+
+/**
+ * print_percent - Print a percent sign.
+ * Return: The number of characters printed (1).
+ */
+int print_percent(void)
+{
+	return (write(1, "%", 1));
 }
