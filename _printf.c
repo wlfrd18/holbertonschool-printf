@@ -66,9 +66,9 @@ int handle_specifiers(char specifier, va_list arguments)
  * @c: The character to print.
  * Return: The number of characters printed (1).
  */
-int print_char(char c)
+int print_char(char character)
 {
-	return (write(1, &c, 1));
+	return (write(1, &character, 1));
 }
 
 /**
@@ -102,25 +102,25 @@ int print_percent(void)
  * @number: number to print
  * Return: the number of character printed.
  */
-int print_number(int n)
+int print_number(int number)
 {
 	char digit;
 	int count = 0;
 
-	if (n < 0)
+	if (number < 0)
 	{
 		write(1, "-", 1);
-		n = -n;
+		number = -number;
 		count++;
 	}
-	if (n / 10)
+	if (number / 10)
 	{
-		count = count + print_number(n/10);
+		count = count + print_number(number/10);
 	}
-	digit = (n % 10) + '0';
+	digit = (number % 10) + '0';
 
 	write(1, &digit, 1);
 	count++;
-	
+
 	return (count);
 }
