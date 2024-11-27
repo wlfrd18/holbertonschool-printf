@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdarg.h>
-#include <stddef.h>
 #include "main.h"
 
 /**
@@ -50,7 +49,7 @@ int handle_specifiers(char specifier, va_list arguments)
 	else if (specifier == 's')
 		count = count + print_string(va_arg(arguments, char *));
 	else if (specifier == '%')
-		count = count + print_percent();
+		count = count + print_char('%');
 	else if ((specifier == 'i') || (specifier == 'd'))
 		count = count + print_number(va_arg(arguments, int));
 	else
