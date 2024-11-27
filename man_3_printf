@@ -1,0 +1,62 @@
+.\" Manpage for _printf function
+.TH _PRINTF 3 "November 2024" "1.0" "C Library"
+.SH NAME
+_printf \- prints formatted output to standard output
+.SH SYNOPSIS
+.B int _printf(const char *format, ...);
+.SH DESCRIPTION
+The
+.B _printf
+function is a simplified implementation of the standard C function
+.B printf
+that takes a format string and variable arguments, and outputs a formatted string to the standard output (stdout).
+
+The format string may contain the following specifiers:
+.IP \[bu]c
+Print a character.
+.IP \[bu]s
+Print a string.
+.IP \[bu]%
+Print a literal percent sign.
+.IP \[bu]d, i
+Print a signed integer.
+
+The function processes the format string and substitutes the corresponding values of the arguments passed to it, and outputs them to the standard output.
+
+.SH PARAMETERS
+The
+.B format
+parameter is a string that can contain both ordinary characters and format specifiers (preceded by a percent sign, `%`). Each format specifier is replaced by the corresponding value of the argument(s) passed to
+.B _printf
+.
+
+The variable arguments are passed in the order corresponding to the format specifiers. They may include characters, strings, and integers.
+
+.SH RETURN VALUE
+The function returns the total number of characters printed, excluding the null byte used to terminate the string.
+
+If an invalid format specifier is encountered, the function will print a percent sign (`%`) followed by the specifier, and continue.
+
+.SH EXAMPLES
+To print a string, character, and integer, you can call the function as follows:
+
+.nf
+#include "main.h"
+
+int main(void) {
+	int len;
+	len = _printf("Hello, %s!\n", "World");
+	_printf("Length of output: %d\n", len);
+	return 0;
+}
+.fi
+
+This would output:
+
+.nf
+Hello, World!
+Length of output: 14
+.fi
+
+	.SH SEE ALSO
+printf(3), sprintf(3), fprintf(3)
