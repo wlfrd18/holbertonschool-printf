@@ -14,4 +14,5 @@ int handle_specifiers(char specifier, va_list arguments);
 int print_char(char c);
 int print_string(char *s);
 int print_percent(void);
+int print_number(int n);
 #endif

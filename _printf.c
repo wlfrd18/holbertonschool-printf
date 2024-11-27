@@ -22,11 +22,11 @@ int _printf(const char *format, ...)
 	if (*pointer == '%')
 	{
 		pointer++;
-		count += handle_specifiers(*pointer, arguments);
+		count = count + handle_specifiers(*pointer, arguments);
 	}
 	else
 	{
-		count += print_char(*pointer);
+		count = count + print_char(*pointer);
 	}
 	pointer++;
 	}
@@ -45,11 +45,13 @@ int handle_specifiers(char specifier, va_list arguments)
 	int count = 0;
 
 	if (specifier == 'c')
-		count += print_char(va_arg(arguments, int));
+		count = count + print_char(va_arg(arguments, int));
 	else if (specifier == 's')
-		count += print_string(va_arg(arguments, char *));
+		count = count + print_string(va_arg(arguments, char *));
 	else if (specifier == '%')
-		count += print_percent();
+		count = count + print_percent();
+	else if ((specifier == 'i') || (specifier == 'd'))
+		count = count + print_number(va_arg(arguments, int));
 	else
 	{
 	count += print_char('%');
@@ -74,16 +76,16 @@ int print_char(char c)
  * @s: The string to print.
  * Return: The number of characters printed.
  */
-int print_string(char *s)
+int print_string(char *string)
 {
-	int len = 0;
+	int index = 0;
 
-	if (s == NULL)
-		s = NULL;
+	if (string == NULL)
+		string = "(null)";
 
-	while (s[len] != '\0')
-		len++;
-	return (write(1, s, len));
+	while (string[index] != '\0')
+		index++;
+	return (write(1, string, index));
 }
 
 /**
@@ -93,4 +95,32 @@ int print_string(char *s)
 int print_percent(void)
 {
 	return (write(1, "%", 1));
+}
+
+/*
+ * print_number - print a number.
+ * @number: number to print
+ * Return: the number of character printed.
+ */
+int print_number(int n)
+{
+	char digit;
+	int count = 0;
+
+	if (n < 0)
+	{
+		write(1, "-", 1);
+		n = -n;
+		count++;
+	}
+	if (n / 10)
+	{
+		count = count + print_number(n/10);
+	}
+	digit = (n % 10) + '0';
+
+	write(1, &digit, 1);
+	count++;
+	
+	return (count);
 }
