@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdarg.h>
+#include <stddef.h>
 #include "main.h"
 
 /**
@@ -57,70 +58,6 @@ int handle_specifiers(char specifier, va_list arguments)
 	count += print_char('%');
 	count += print_char(specifier);
 	}
-
-	return (count);
-}
-
-/**
- * print_char - Print a single character.
- * @c: The character to print.
- * Return: The number of characters printed (1).
- */
-int print_char(char character)
-{
-	return (write(1, &character, 1));
-}
-
-/**
- * print_string - Print a string.
- * @s: The string to print.
- * Return: The number of characters printed.
- */
-int print_string(char *string)
-{
-	int index = 0;
-
-	if (string == NULL)
-		string = "(null)";
-
-	while (string[index] != '\0')
-		index++;
-	return (write(1, string, index));
-}
-
-/**
- * print_percent - Print a percent sign.
- * Return: The number of characters printed (1).
- */
-int print_percent(void)
-{
-	return (write(1, "%", 1));
-}
-
-/*
- * print_number - print a number.
- * @number: number to print
- * Return: the number of character printed.
- */
-int print_number(int number)
-{
-	char digit;
-	int count = 0;
-
-	if (number < 0)
-	{
-		write(1, "-", 1);
-		number = -number;
-		count++;
-	}
-	if (number / 10)
-	{
-		count = count + print_number(number/10);
-	}
-	digit = (number % 10) + '0';
-
-	write(1, &digit, 1);
-	count++;
 
 	return (count);
 }

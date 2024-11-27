@@ -1,6 +1,7 @@
 #ifndef MAIN_H_
 #define MAIN_H_
 #include <stddef.h>
+#include <stdarg.h>
 
 /*
  * File: main.h
