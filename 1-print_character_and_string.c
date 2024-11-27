@@ -35,5 +35,6 @@ int print_string(char *string)
  */
 int print_percent(void)
 {
-	return (write(1, "%", 1));
+	write(1, "%", 1);
+	return (2);
 }
