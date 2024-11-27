@@ -15,9 +15,8 @@ int print_number(int number)
 
 	if (number < 0)
 	{
-		write(1, "-", 1);
+		count += print_char('-');
 		number = -number;
-		count++;
 	}
 	if (number / 10)
 	{
@@ -25,8 +24,7 @@ int print_number(int number)
 	}
 	digit = (number % 10) + '0';
 
-	write(1, &digit, 1);
-	count++;
+	count = count + print_char(digit);
 
 	return (count);
 }
