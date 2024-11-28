@@ -1,4 +1,6 @@
-# Implementation of the _printf function
+# Implementation of the _printf function  
+
+[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=100&size=18&duration=2000&pause=1000&color=E2A40FE7&background=17EEF720&width=435&lines=This+project+is+made+by+%3A;Brice+Kanga;Wilfried+Guele)](https://git.io/typing-svg)
 
 ## Table of Contents
 #### 1- Introduction  
@@ -216,27 +218,9 @@ For correct use of the **_printf function**, it is essential to:
 * Properly handle pointers.
 
 
-## Badges
+## Screenshots
 
-Add badges from somewhere like: [shields.io](https://shields.io/)
-
-[![MIT License](https://img.shields.io/badge/License-MIT-green.svg)](https://choosealicense.com/licenses/mit/)
-[![GPLv3 License](https://img.shields.io/badge/License-GPL%20v3-yellow.svg)](https://opensource.org/licenses/)
-[![AGPL License](https://img.shields.io/badge/license-AGPL-blue.svg)](http://www.gnu.org/licenses/agpl-3.0)
-
-
-## Feedback
-
-
-## FAQ
-
-#### Question 1
-
-Answer 1
-
-#### Question 2
-
-Answer 2
+![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
 
 
 ## Documentation
@@ -244,8 +228,143 @@ Answer 2
 [secrets of "printf"](https://s3.eu-west-3.amazonaws.com/hbtn.intranet/uploads/misc/2022/11/d38f88e96a617135804dca9f9c49632751e06aa7.pdf?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIA4MYA5JM5DUTZGMZG%2F20241128%2Feu-west-3%2Fs3%2Faws4_request&X-Amz-Date=20241128T021031Z&X-Amz-Expires=86400&X-Amz-SignedHeaders=host&X-Amz-Signature=6baae0dd3453da793e800883b230c156564828deee4074ad2b8da272a54eb7d6)
 
 [man 3 printf](http://manpagesfr.free.fr/man/man3/printf.3.html)
-## Screenshots
+## FAQ
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+### Frequently Asked Questions (FAQ) for _printf Function Implementation
 
+#### 1. **What is the purpose of the _printf function?**
+
+**Answer**:  
+The _printf function is a custom implementation of the standard `printf` function in C. It is used to format and print data (strings, integers, characters, etc.) to the standard output (stdout). It takes a format string and a variable number of arguments, processes each argument according to the format specifiers, and outputs the corresponding formatted result.
+
+---
+
+#### 2. **What format specifiers are supported by _printf?**
+
+**Answer**:  
+Initially, _printf supports the following basic format specifiers:
+- **c**: Prints a character.
+- **s**: Prints a string.
+- **d** or **i**: Prints an integer.
+- **%**: Prints a percent sign.
+
+Additional specifiers can be added as the implementation evolves, such as handling unsigned integers (`u`), hexadecimal (`x`, `X`), and others.
+
+---
+
+#### 3. **How does _printf handle format specifiers?**
+
+**Answer**:  
+When a format specifier (preceded by `%`) is encountered in the format string, _printf calls the `handle_specifiers` function to process it. Based on the specifier (e.g., `c`, `s`, `%`, `d`, `i`), the appropriate printing function (e.g., `print_char`, `print_string`, `print_percent`, or `print_number`) is called. If the specifier is not recognized, `%` followed by the specifier is printed.
+
+---
+
+#### 4. **What happens if a NULL string is passed to _printf?**
+
+**Answer**:  
+If a NULL string is passed with the `%s` specifier, the function will print `(null)` instead of causing a crash. This behavior is specifically handled in the `print_string` function to ensure safety and proper output.
+
+---
+
+#### 5. **What does the _printf function return?**
+
+**Answer**:  
+The _printf function returns the total number of characters printed, excluding the null terminator used to mark the end of the string. This return value can be useful for debugging or for confirming the success of the function.
+
+---
+
+#### 6. **How does _printf handle integer values?**
+
+**Answer**:  
+When an integer value is passed with the `%d` or `%i` specifier, the `print_number` function is called. The function checks if the number is negative, prints a minus sign if needed, and then recursively prints the digits of the number in the correct order.
+
+---
+
+#### 7. **What happens if an invalid specifier is passed?**
+
+**Answer**:  
+If an invalid specifier (e.g., `%r` for an unsupported specifier) is passed, _printf prints `%` followed by the invalid specifier. This ensures that the function behaves predictably even when incorrect input is provided.
+
+---
+
+#### 8. **What are the limitations of _printf in this project?**
+
+**Answer**:  
+Some of the limitations in this implementation include:
+- No support for field widths, precision, or flags (such as left/right alignment or zero-padding).
+- The function does not handle length modifiers like `l` or `h`.
+- Only basic specifiers like `%c`, `%s`, `%d`, `%i`, and `%` are supported initially.
+
+---
+
+#### 9. **How does _printf handle the `write` system call?**
+
+**Answer**:  
+The `write` system call is used in the printing functions (e.g., `print_char`, `print_string`, etc.) to send the formatted output to the standard output. The `write` call is a low-level function that directly writes to the file descriptor (1 for stdout). This is used instead of `printf`'s higher-level implementation.
+
+---
+
+#### 10. **Why do I need to use `va_start` and `va_end`?**
+
+**Answer**:  
+The `va_start` and `va_end` macros are necessary to manage the variable argument list. `va_start` initializes the arguments list, allowing you to access the variable arguments passed to _printf. `va_end` is called at the end of argument processing to clean up any memory used by the variable argument list. These macros are crucial for handling an unknown number of arguments in a function like _printf.
+
+---
+
+#### 11. **Can _printf be used for performance-critical applications?**
+
+**Answer**:  
+No, _printf is not optimized for high-performance scenarios. It is a custom implementation and may be slower than alternatives like `write` or `sprintf`. If performance is critical, it is recommended to use more efficient methods like direct use of `write` or optimized functions from the standard library.
+
+---
+
+#### 12. **How does _printf handle the printing of negative numbers?**
+
+**Answer**:  
+In the case of negative numbers, the `print_number` function handles them by first checking if the number is negative. If it is, a minus sign is printed using `print_char`, and then the absolute value of the number is printed recursively. This ensures that the negative sign is printed only once at the beginning.
+
+---
+
+#### 13. **Why is my output incorrect when using %s with an empty string?**
+
+**Answer**:  
+If an empty string (i.e., `""`) is passed to _printf with the `%s` specifier, the output should be an empty output (no characters printed). If it is not behaving as expected, check the implementation to ensure that the length of the string is properly handled and that it is not being mistakenly treated as `NULL`.
+
+---
+
+#### 14. **What is the expected output when I call _printf with just a `%`?**
+
+**Answer**:  
+When you call _printf with just a `%` (e.g., `_printf("%%");`), the function will correctly print a single `%` character. This is handled by the `print_percent` function, which simply writes the `%` to stdout.
+
+---
+
+#### 15. **What should I do if my _printf implementation is failing to compile?**
+
+**Answer**:  
+Ensure that:
+1. You have correctly included the necessary header files (e.g., `main.h`, `stdarg.h`).
+2. You are using the correct compiler flags (`-Wall -Werror -Wextra -pedantic -std=gnu89`).
+3. Your code adheres to the Betty style (if required by the project).
+4. Your functions are correctly defined and that all function prototypes match what is expected.
+
+If the issue persists, try to isolate the problem by compiling the code in smaller chunks or running it through a debugger.
+
+## ðŸ›  Skills
+
+![wlfrd18's Stats](https://github-readme-stats.vercel.app/api?username=wlfrd18&theme=vue-dark&show_icons=true&hide_border=true&count_private=true)
+![wlfrd18's Streak](https://github-readme-streak-stats.herokuapp.com/?user=wlfrd18&theme=vue-dark&hide_border=true)
+![wlfrd18's Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=wlfrd18&theme=vue-dark&show_icons=true&hide_border=true&layout=compact)
+***  
+
+***  
+
+![kanga-prog's Stats](https://github-readme-stats.vercel.app/api?username=kanga-prog&theme=vue-dark&show_icons=true&hide_border=true&count_private=true)
+![kanga-prog's Streak](https://github-readme-streak-stats.herokuapp.com/?user=kanga-prog&theme=vue-dark&hide_border=true)
+![kanga-prog's Top Languages](https://github-readme-stats.vercel.app/api/top-langs/?username=kanga-prog&theme=vue-dark&show_icons=true&hide_border=true&layout=compact)
+## ðŸ”— Links
+
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/wilfried-guele-5a456a190/?otpToken=MTUwMDFkZTgxNzJhY2ZjMmJjMjQwNGVkNDUxY2UwYjc4OGNlZDc0MjkwYWU4NzYxNzZjZTAwNjY0YzVlNThmYmYyZDBkZjgyNmJmYWUyZmMwMzhjYTkwMmMyOTM3MWE2Yzc3NWQ0OTI3YTYxZmQ3MzhjOTA4YiwxLDE%3D&midSig=0mo82sJRdDGbw1&eid=cgtpzg-m4094dyz-ns&midToken=AQGShgxxqbBN4g&original_referer=&trkEmail=eml-email_network_conversations_01-header-0-profile_glimmer-null-cgtpzg%7Em4094dyz%7Ens-null-null&trk=eml-email_network_conversations_01-header-0-profile_glimmer&originalSubdomain=cm)
+****  
+[![linkedin](https://img.shields.io/badge/linkedin-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/kanga-kouakou-brice-8a787a16a/)
 
