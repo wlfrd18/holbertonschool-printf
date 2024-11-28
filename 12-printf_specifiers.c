@@ -23,7 +23,7 @@ int print_string(char *string)
 	if (string == NULL)
 		string = "(null)";
 
-	while (string[index] != '\0')
+	while (string[index])
 		index++;
 	return (write(1, string, index));
 }
