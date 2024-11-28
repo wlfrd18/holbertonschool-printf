@@ -25,7 +25,8 @@ int print_string(char *string)
 
 	while (string[index] != '\0')
 		index++;
-	return (write(1, string, index));
+	write(1, string, index);
+	return (index);
 }
 
 /**
