@@ -21,7 +21,7 @@ int print_string(char *string)
 	int index = 0;
 
 	if (string == NULL)
-		string = "(null)\n";
+		string = "(null)";
 
 	while (string[index] != '\0')
 		index++;
