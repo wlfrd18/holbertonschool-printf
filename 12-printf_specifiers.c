@@ -21,7 +21,7 @@ int print_string(char *string)
 	int index = 0;
 
 	if (string == NULL)
-		string = "(null)";
+		string = "(null)\n";
 
 	while (string[index] != '\0')
 		index++;
@@ -51,11 +51,11 @@ int print_number(int number)
 	if (number < 0)
 	{
 		count += print_character('-');
-		abs_number = -number;
+		abs_number = (unsigned int)(-number);
 	}
 	else
 	{
-		abs_number = number;
+		abs_number = (unsigned int)(number);
 	}
 	if (abs_number / 10)
 	{
