@@ -31,6 +31,15 @@ int print_string(char *string)
 }
 
 /**
+ * print_percent - Print a percent sign.
+ * Return: The number of characters printed (1).
+ */
+int print_percent(void)
+{
+	return (write(1, "%", 1));
+}
+
+/**
  * print_number - Print an integer to standard output.
  * @number: number to print.
  * Return: the number of character printed.
@@ -60,3 +69,4 @@ int print_number(int number)
 
 	return (count);
 }
+
