@@ -49,12 +49,12 @@ int handle_specifiers(char specifier, va_list arguments)
 	else if (specifier == 's')
 		count = count + print_string(va_arg(arguments, char *));
 	else if (specifier == '%')
-		count = count + print_character('%');
+		count = count + print_percent();
 	else if ((specifier == 'i') || (specifier == 'd'))
 		count = count + print_number(va_arg(arguments, int));
 	else
 	{
-	count += print_character('%');
+	count += print_percent();
 	count += print_character(specifier);
 	}
 

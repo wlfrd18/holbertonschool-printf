@@ -24,9 +24,7 @@ int print_string(char *string)
 		string = "(null)";
 
 	while (string[index] != '\0')
-	{
 		index++;
-	}
 	return (write(1, string, index));
 }
 
