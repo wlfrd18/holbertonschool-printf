@@ -2,11 +2,11 @@
 #include <stdarg.h>
 #include <unistd.h>
 /**
- * print_char - Print a single character.
+ * print_character - Print a single character.
  * @c: The character to print.
  * Return: The number of characters printed (1).
  */
-int print_char(char c)
+int print_character(char c)
 {
 	return (write(1, &c, 1));
 }
@@ -49,7 +49,7 @@ int print_number(int number)
 
 	if (number < 0)
 	{
-		count += print_char('-');
+		count += print_character('-');
 		number = -number;
 	}
 	if (number / 10)
@@ -58,7 +58,7 @@ int print_number(int number)
 	}
 	digit = (number % 10) + '0';
 
-	count = count + print_char(digit);
+	count = count + print_character(digit);
 
 	return (count);
 }

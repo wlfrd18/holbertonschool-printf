@@ -26,7 +26,7 @@ int _printf(const char *format, ...)
 	}
 	else
 	{
-		count = count + print_char(*pointer);
+		count = count + print_character(*pointer);
 	}
 	pointer++;
 	}
@@ -45,17 +45,17 @@ int handle_specifiers(char specifier, va_list arguments)
 	int count = 0;
 
 	if (specifier == 'c')
-		count = count + print_char(va_arg(arguments, int));
+		count = count + print_character(va_arg(arguments, int));
 	else if (specifier == 's')
 		count = count + print_string(va_arg(arguments, char *));
 	else if (specifier == '%')
-		count = count + print_char('%');
+		count = count + print_character('%');
 	else if ((specifier == 'i') || (specifier == 'd'))
 		count = count + print_number(va_arg(arguments, int));
 	else
 	{
-	count += print_char('%');
-	count += print_char(specifier);
+	count += print_character('%');
+	count += print_character(specifier);
 	}
 
 	return (count);
