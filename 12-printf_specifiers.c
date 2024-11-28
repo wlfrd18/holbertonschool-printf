@@ -18,7 +18,7 @@ int print_character(char c)
  */
 int print_string(char *string)
 {
-	int index = 1;
+	int index = 0;
 
 	if (string == NULL)
 		string = "(null)";
