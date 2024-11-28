@@ -25,7 +25,7 @@ int print_string(char *string)
 
 	while (string[index] != '\0')
 		index++;
-	return (write(1, string, (index + 1)));
+	return (write(1, string, index));
 }
 
 /**
@@ -46,17 +46,22 @@ int print_number(int number)
 {
 	char digit;
 	int count = 0;
+	unsigned int abs_number;
 
 	if (number < 0)
 	{
 		count += print_character('-');
-		number = -number;
+		abs_number = -number;
 	}
-	if (number / 10)
+	else
 	{
-		count = count + print_number(number / 10);
+		abs_number = number;
 	}
-	digit = (number % 10) + '0';
+	if (abs_number / 10)
+	{
+		count = count + print_number(abs_number / 10);
+	}
+	digit = (abs_number % 10) + '0';
 
 	count = count + print_character(digit);
 
