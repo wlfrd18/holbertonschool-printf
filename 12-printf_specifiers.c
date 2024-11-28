@@ -25,8 +25,7 @@ int print_string(char *string)
 
 	while (string[index] != '\0')
 		index++;
-	write(1, string, index);
-	return (index);
+	return (write(1, string, index));
 }
 
 /**
@@ -35,7 +34,7 @@ int print_string(char *string)
  */
 int print_percent(void)
 {
-	return (write(1, "%", 1));
+	return (write(1, "%", 2));
 }
 
 /**
