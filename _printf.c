@@ -11,8 +11,8 @@
  */
 int _printf(const char *format, ...)
 {
- 	va_list arguments;
- 	int count = 0;
+	va_list arguments;
+	int count = 0;
 	const char *pointer = format;
 
 	va_start(arguments, format);
@@ -58,6 +58,6 @@ int handle_specifiers(char specifier, va_list arguments)
 	count += print_character(specifier);
 	}
 
- 	return (count);
+	return (count);
 }
 
