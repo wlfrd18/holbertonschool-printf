@@ -1,77 +1,75 @@
-PRINTF(3)                   Library Functions Manual                  PRINTF(3)
+_PRINTF(3)                   Library Functions Manual                  _PRINTF(3)
 
 NAME
-       printf - print formatted output to stdout
+	_printf - print formatted output to stdout and return the number of
+	character printed excluding the null byte of end of string.
 
 SYNOPSIS
-       #include <stdio.h>
+	#include "main.h"
 
-       int printf(const char *format, ...);
+	int printf(const char *format, ...);
 
 DESCRIPTION
-       The printf() function sends formatted output to stdout (the standard
-       output stream). The format string is a character string that may
-       contain format specifiers, which are replaced by the values provided
-       in the subsequent arguments.
+	The _printf() function sends formatted output to stdout (the standard
+	output stream). The format string is a character string that may
+	contain format specifiers, which are replaced by the values provided
+	in the subsequent arguments.
 
-       The basic syntax of the format string is as follows:
-       format:
-           A character string that may include any combination of normal
-           characters and format specifiers, which are replaced by the values
-           of the arguments passed after the format string.
+	The basic syntax of the format string is as follows:
+	format:
+	A character string that may include any combination of normal
+	characters and format specifiers, which are replaced by the values
+	of the arguments passed after the format string.
 
-       format specifiers:
-           - %d, %i       : Signed decimal integer
-           - %u           : Unsigned decimal integer
-           - %f           : Floating-point number
-           - %s           : String of characters
-           - %c           : Single character
-           - %x, %X       : Unsigned hexadecimal integer (lowercase/uppercase)
-           - %o           : Unsigned octal integer
-           - %p           : Pointer (address)
-           - %ld, %li     : Long signed decimal integer
-           - %lf          : Double precision floating-point number
-           - %%           : Literal percent sign
+	format specifiers:
+	- %d, %i       : Signed decimal integer.
+	- %s           : String of characters.
+	- %c           : Single character.
+	- %%	       : Literal percent sign.
 
-       If the format string contains more arguments than specified format specifiers,
-       the remaining arguments are ignored. If there are fewer arguments than needed
-       for the format specifiers, the behavior is undefined.
+	If the format string contains more arguments than specified format specifiers,
+	the remaining arguments are ignored. If there are fewer arguments than needed
+	for the format specifiers, the behavior is undefined.
 
 RETURN VALUE
-       On success, the total number of characters written (excluding the null
-       byte used to end the string) is returned. If an error occurs, a negative
-       value is returned.
+	On success, the total number of characters written (excluding the null
+	byte used to end the string) is returned. If an error occurs, a negative
+	value is returned.
 
 ERRORS
-       The printf() function may fail due to various reasons including memory
-       allocation issues, I/O errors, or invalid arguments. However, typical
-       error handling is not available directly through printf, and you may need
-       to check the return value for success or failure.
+	The _printf() function may fail due to various reasons including I/O errors,
+	or invalid arguments. However, typical error handling is not available 
+	directly through _printf, and you may need to check the return value for
+	success or failure.
 
 EXAMPLES
-       The following examples demonstrate basic usage of printf():
+	The following examples demonstrate basic usage of _printf():
 
-       printf("Hello, world!\n");
-           Prints "Hello, world!" followed by a newline.
+		_printf("Hello, world!\n");
+		Prints "Hello, world!" followed by a newline.
 
-       printf("The number is %d\n", 42);
-           Prints "The number is 42".
+		_printf("The number is %d\n", 42);
+		Prints "The number is 42".
 
-       printf("Pi is approximately %.2f\n", 3.14159);
-           Prints "Pi is approximately 3.14".
+		_printf("my age is %i\n", 27);
+		Prints "my age is 27".
 
-       printf("Hexadecimal: %x\n", 255);
-           Prints "Hexadecimal: ff".
+		_printf("my name is: %s\n", Jean);
+		Prints "my name is: Jean".
 
-       printf("Pointer address: %p\n", (void *) &var);
-           Prints the address of the variable 'var' in hexadecimal.
+		_printf("i have 100%%\n");
+		prints "i have 100%".
 
+		_printf("You have %c in maths\n", A);
+		prints "You have A in maths". 
+
+		
 CONFORMING TO
-       The printf() function conforms to ANSI C and POSIX.1.
+	The _printf() function conforms to ANSI C and POSIX.1.
 
 
 BUGS
-       There are various edge cases and undefined behaviors, especially when
-       format specifiers and the arguments do not match in type or quantity.
-       Always ensure that the number and types of arguments match the format string.
+	There are various edge cases and undefined behaviors, especially when
+	format specifiers and the arguments do not match in type or quantity.
+	Always ensure that the number and types of arguments match the format string.
 
