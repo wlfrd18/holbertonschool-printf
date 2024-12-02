@@ -1,4 +1,4 @@
-# Implementation of the _printf function.  
+# Implementation of the _printf function.
 
 [![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=100&size=18&duration=2000&pause=1000&color=E2A40FE7&background=17EEF720&width=435&lines=This+project+is+made+by+%3A;Brice+Kanga;Wilfried+Guele)](https://git.io/typing-svg)
 
